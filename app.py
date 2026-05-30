@@ -78,6 +78,10 @@ with optimization_tab:
     max_leg_eff = st.session_state.get("max_leg_override", max_leg)
     st.caption(f"Effective max-leg: {max_leg_eff:.0f} km")
 
+    hub_bonus = st.slider("Hub bonus km", min_value=0, max_value=500, value=100, step=25)
+    use_nofly = st.checkbox("Use no-fly zones", value=True)
+    use_weather = st.checkbox("Use weather penalties", value=True)
+
     if st.button("Optimize Flight Path", type="primary"):
         config = RoutingConfig(
             max_leg_km=float(max_leg_eff),
