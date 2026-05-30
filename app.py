@@ -146,8 +146,82 @@ with analytics_tab:
     with col2:
         st.markdown("#### Average Processing Time (s)")
         ptime = pd.DataFrame({"Day": ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"], "Time": [1.5,1.4,1.3,1.2,1.2,1.1,1.2]}).set_index("Day")
-        st.line_chart(ptime)
+        st.line_chart(ptime)    
+        st.markdown(
+        """
+        <style>
+        .custom-footer {
+            margin-top: 4rem;
+            padding: 1.5rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.95rem;
+        }
 
-st.markdown("---")
-    # Footer
-st.caption("Advanced flight path optimization using A* algorithms for enhanced aviation efficiency")
+        .custom-footer .caption {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 0.9rem;
+        }
+
+        .custom-footer .heart {
+            color: #ff4b6e;
+            font-weight: 700;
+        }
+        </style>
+
+        <div class="custom-footer">
+            <div class="caption">
+                Advanced flight path optimization using A* algorithms for enhanced aviation efficiency
+            </div>
+            <div>
+                Made with <span class="heart">❤️</span> by Honey
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+        
+
+st.markdown(
+    """
+    <style>
+    .custom-footer {
+        margin-top: 4rem;
+        padding: 1.5rem 0;
+        text-align: center;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        color: rgba(255, 255, 255, 0.65);
+        font-size: 0.95rem;
+        letter-spacing: 0.2px;
+    }
+
+    .custom-footer .caption {
+        margin-bottom: 0.5rem;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.9rem;
+    }
+
+    .custom-footer .credit {
+        color: rgba(255, 255, 255, 0.75);
+        font-weight: 500;
+    }
+
+    .custom-footer .heart {
+        color: #ff4b6e;
+        font-weight: 700;
+    }
+    </style>
+
+    <div class="custom-footer">
+        <div class="caption">
+            Advanced flight path optimization using A* algorithms for enhanced aviation efficiency
+        </div>
+        <div class="credit">
+            Made with <span class="heart">❤️</span> by Honey
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
