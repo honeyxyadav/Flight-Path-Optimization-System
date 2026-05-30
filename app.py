@@ -67,9 +67,9 @@ with optimization_tab:
 	with c2:
 		destination = st.selectbox("Destination", options=codes, index=codes.index("BOM") if "BOM" in codes else 1)
 	with c3:
-    ac_type = st.selectbox("Aircraft Type", options=list(AIRCRAFT_RANGE.keys()), index=2)
+        ac_type = st.selectbox("Aircraft Type", options=list(AIRCRAFT_RANGE.keys()), index=2)
 
-    max_leg = AIRCRAFT_RANGE[ac_type]
+max_leg = AIRCRAFT_RANGE[ac_type]
 
 st.button("Set aircraft max-leg", on_click=lambda: st.session_state.update({"max_leg_override": max_leg}))
 max_leg_eff = st.session_state.get("max_leg_override", max_leg)
