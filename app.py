@@ -59,30 +59,33 @@ with overview_tab:
 		st.metric("Active Monitoring", "24/7")
 
 with optimization_tab:
-	st.subheader("Route Planning & Optimization")
-	codes = sorted(AIRPORTS.keys())
-	c1, c2, c3 = st.columns([1,1,1])
-	with c1:
-		origin = st.selectbox("Origin", options=codes, index=codes.index("DEL") if "DEL" in codes else 0)
-	with c2:
-		destination = st.selectbox("Destination", options=codes, index=codes.index("BOM") if "BOM" in codes else 1)
-	with c3:
+    st.subheader("Route Planning & Optimization")
+    codes = sorted(AIRPORTS.keys())
+    c1, c2, c3 = st.columns([1, 1, 1])
+
+    with c1:
+        origin = st.selectbox("Origin", options=codes, index=codes.index("DEL") if "DEL" in codes else 0)
+
+    with c2:
+        destination = st.selectbox("Destination", options=codes, index=codes.index("BOM") if "BOM" in codes else 1)
+
+    with c3:
         ac_type = st.selectbox("Aircraft Type", options=list(AIRCRAFT_RANGE.keys()), index=2)
 
-max_leg = AIRCRAFT_RANGE[ac_type]
+    max_leg = AIRCRAFT_RANGE[ac_type]
 
-st.button("Set aircraft max-leg", on_click=lambda: st.session_state.update({"max_leg_override": max_leg}))
-max_leg_eff = st.session_state.get("max_leg_override", max_leg)
-	st.caption(f"Effective max-leg: {max_leg_eff:.0f} km")
+    st.button("Set aircraft max-leg", on_click=lambda: st.session_state.update({"max_leg_override": max_leg}))
+    max_leg_eff = st.session_state.get("max_leg_override", max_leg)
+    st.caption(f"Effective max-leg: {max_leg_eff:.0f} km")
 
-	if st.button("Optimize Flight Path", type="primary"):
-		config = RoutingConfig(
-			max_leg_km=float(max_leg_eff),
-			preferred_hubs=PREFERRED_HUBS,
-			hub_bonus_km=float(hub_bonus),
-			no_fly_zones=NO_FLY_ZONES if use_nofly else [],
-			weather_edge_penalty_km=WEATHER_EDGE_PENALTY_KM if use_weather else {},
-		)
+    if st.button("Optimize Flight Path", type="primary"):
+        config = RoutingConfig(
+            max_leg_km=float(max_leg_eff),
+            preferred_hubs=PREFERRED_HUBS,
+            hub_bonus_km=float(hub_bonus),
+            no_fly_zones=NO_FLY_ZONES if use_nofly else [],
+            weather_edge_penalty_km=WEATHER_EDGE_PENALTY_KM if use_weather else {},
+        )
 		try:
 			res = find_optimal_route(AIRPORTS, origin, destination, config)
 			st.success(f"Route found: {' → '.join(res.path)}")
